@@ -1,12 +1,7 @@
 <resources>
-    <string name="app_name">Students_L2</string>
+    <string name="app_name">Books_L3</string>
     <string name="btn_text">Показати список</string>
-    <string name="label_text">Список студентів</string>
-    <string-array name="students_group">
-        <item>301</item>
-        <item>302</item>
-        <item>303</item>
-        <item>308</item>
-        <item>309</item>
-    </string-array>
+    <string name="btn_send">Відправити в зовнішньому застосунку</string>
+    <string name="label_text">Список книжок</string>
+
 </resources>
