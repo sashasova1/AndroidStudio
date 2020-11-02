@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         String author = (String) spinner.getSelectedItem();
 
-        Intent intent = new Intent(this, BookActivity.class);
-        intent.putExtra(BookActivity.BOOK_AUTHOR, author);
+        Intent intent = new Intent(this, AuthorActivity.class);
+        intent.putExtra(AuthorActivity.BOOK_AUTHOR, author);
         startActivity(intent);
     }
 

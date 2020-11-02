@@ -1,15 +1,19 @@
 <resources>
-    <string name="app_name">Books_L5</string>
+    <string name="app_name">Books_L6</string>
     <string name="btn_text">Показати список</string>
     <string name="btn_send">Відправити в зовнішньому застосунку</string>
     <string name="label_text">Список книжок</string>
     <string name="author_text">Автор</string>
+    <string name="birthplace_text">Місце народження</string>
     <string name="name_text">Назва</string>
     <string name="btn_ok_text">ОК</string>
     <string name="btn_book_detail_text">Детальніше</string>
     <string-array name="book_author">
-        <item>Всеволод Нестайко</item>
         <item>Тарас Шевченко</item>
+        <item>Всеволод Нестайко</item>
+        <item>Брет Истон Эллис</item>
+        <item>Габриэль Гарсиа Маркес</item>
+        <item>Марк Твен</item>
     </string-array>
     <string name="author_direction_txt">Літературний напрям</string>
     <string name="author_direction_baroque_txt">Бароко</string>

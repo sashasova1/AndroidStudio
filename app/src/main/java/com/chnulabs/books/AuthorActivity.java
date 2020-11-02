@@ -11,13 +11,13 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class BookActivity extends AppCompatActivity {
+public class AuthorActivity extends AppCompatActivity {
     public static final String BOOK_AUTHOR = "author";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book);
+        setContentView(R.layout.activity_author2);
 
         Intent intent = getIntent();
         String authorName = intent.getStringExtra(BOOK_AUTHOR);
@@ -49,8 +49,8 @@ public class BookActivity extends AppCompatActivity {
     }
 
     public void onOkBtnClick(View view) {
-        String outString = "Автор " + ((TextView) findViewById(R.id.authorEdit)).getText() + "\n";
-        outString += "народився у " + ((TextView) findViewById(R.id.birthplaceEdit)).getText() + ".\n Літературний напрям - ";
+        String outString = "\tАвтор " + ((TextView) findViewById(R.id.authorEdit)).getText() + "\n";
+        outString += "народився у " + ((TextView) findViewById(R.id.birthplaceEdit)).getText() + ".\n\tЛітературний напрям - ";
         if (((RadioButton) findViewById(R.id.author_direction_baroque)).isChecked()) {
             outString += "бароко\n";
         } else if (((RadioButton) findViewById(R.id.author_direction_realism)).isChecked()) {
@@ -59,7 +59,7 @@ public class BookActivity extends AppCompatActivity {
             outString += "сентименталізм\n";
         }
 
-        outString += "Мови творів: \n";
+        outString += "\tМови творів: \n";
         if (((CheckBox) findViewById(R.id.ua_flg)).isChecked()) {
             outString += "українська \n";
         }

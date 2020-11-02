@@ -42,9 +42,9 @@ public class AuthorDetails {
             Arrays.asList(
                     new AuthorDetails("Тарас Шевченко", "с. Моринці", 1, false, true),
                     new AuthorDetails("Всеволод Нестайко", "м. Бердичів", 1, true, true),
-                    new AuthorDetails("Габриэль Гарсиа Маркес", "м. Бердичів", 2, false, false),
-                    new AuthorDetails("Брет Истон Эллис", "м. Бердичів", 1, false, false),
-                    new AuthorDetails("Марк Твен", "м. Бердичів", 0, false, false)
+                    new AuthorDetails("Габриэль Гарсиа Маркес", "м. Аракатака", 2, false, false),
+                    new AuthorDetails("Брет Истон Эллис", "м. Лос-Анджелес", 1, false, false),
+                    new AuthorDetails("Марк Твен", "штат Флорида", 0, false, false)
             )
     );
 
