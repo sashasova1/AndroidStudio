@@ -4,30 +4,146 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:orientation="vertical"
     tools:context=".BookActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="293dp"
+            android:layout_marginBottom="20dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/lib" />
+
+        <TextView
+            android:id="@+id/authorNameImageTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:background="#F9F0F0"
+            android:text="Автор"
+            android:textSize="@dimen/default_text_size" />
+
+        <TextView
+            android:id="@+id/birthplaceImageTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginBottom="@dimen/default_padding"
+            android:background="#F9F0F0"
+            android:text="Місце народження"
+            android:textSize="@dimen/default_text_size" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/author_text"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/authorEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="textPersonName" />
+
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="@dimen/default_padding"
+        android:text="Місце народження"
+        android:textSize="@dimen/default_text_size" />
+
+    <EditText
+        android:id="@+id/birthplaceEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <TextView android:text="@string/author_direction_txt" />
+
+            <RadioGroup>
+
+                <RadioButton
+                    android:id="@+id/author_direction_baroque"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/author_direction_baroque_txt" />
+
+                <RadioButton
+                    android:id="@+id/author_direction_realism"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/author_direction_realism_txt" />
+
+                <RadioButton
+                    android:id="@+id/author_direction_sentimentalism"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/author_direction_sentimentalism_txt" />
+            </RadioGroup>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView android:text="@string/lang_flg_txt" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/ua_flg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ua_flg_txt" />
+
+                <CheckBox
+                    android:id="@+id/ru_flg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ru_flg_txt" />
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/btnOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/label_text"
-        android:textSize="18sp"/>
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/btn_send"
-        android:textSize="19sp"
-        android:onClick="onBtnSendClick"/>
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:textSize="19sp"
-        android:onClick="onBtnPlusClick"/>
-
+        android:layout_gravity="end"
+        android:layout_marginTop="16dp"
+        android:text="@string/btn_ok_text"
+        android:textSize="20sp"
+        android:onClick="onOkBtnClick"/>
 </LinearLayout>

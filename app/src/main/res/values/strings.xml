@@ -1,7 +1,22 @@
 <resources>
-    <string name="app_name">Books_L4</string>
+    <string name="app_name">Books_L5</string>
     <string name="btn_text">Показати список</string>
     <string name="btn_send">Відправити в зовнішньому застосунку</string>
     <string name="label_text">Список книжок</string>
+    <string name="author_text">Автор</string>
+    <string name="name_text">Назва</string>
+    <string name="btn_ok_text">ОК</string>
+    <string name="btn_book_detail_text">Детальніше</string>
+    <string-array name="book_author">
+        <item>Всеволод Нестайко</item>
+        <item>Тарас Шевченко</item>
+    </string-array>
+    <string name="author_direction_txt">Літературний напрям</string>
+    <string name="author_direction_baroque_txt">Бароко</string>
+    <string name="author_direction_realism_txt">Реалізм</string>
+    <string name="author_direction_sentimentalism_txt">Сентименталізм</string>
 
+    <string name="lang_flg_txt">Мова творів</string>
+    <string name="ua_flg_txt">Українська</string>
+    <string name="ru_flg_txt">Російска</string>
 </resources>

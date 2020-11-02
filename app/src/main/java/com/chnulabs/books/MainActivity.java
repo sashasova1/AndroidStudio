@@ -6,15 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PersistableBundle;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.Locale;
-
-import javax.net.ssl.HandshakeCompletedEvent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,14 +21,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             seconds = savedInstanceState.getInt("timer");
         }
         runTimer();
     }
 
-    public void onBtnClick(View view){
+    public void onBtnClick(View view) {
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        String author = (String) spinner.getSelectedItem();
+
+        Intent intent = new Intent(this, BookListActivity.class);
+        intent.putExtra(BookListActivity.BOOK_AUTHOR, author);
+        startActivity(intent);
+    }
+
+    public void onBookBtnClick(View view) {
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        String author = (String) spinner.getSelectedItem();
+
         Intent intent = new Intent(this, BookActivity.class);
+        intent.putExtra(BookActivity.BOOK_AUTHOR, author);
         startActivity(intent);
     }
 
@@ -54,22 +63,22 @@ public class MainActivity extends AppCompatActivity {
         isRunning = false;
     }
 
-    private void runTimer(){
+    private void runTimer() {
         final TextView timeView = findViewById(R.id.timer);
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
-                int hours = seconds/3600;
-                int minutes = (seconds%3600)/60;
-                int secs = seconds%60;
+                int hours = seconds / 3600;
+                int minutes = (seconds % 3600) / 60;
+                int secs = seconds % 60;
                 String time = String.format(Locale.getDefault(),
                         "%d:%02d:%02d", hours, minutes, secs);
                 timeView.setText(time);
                 if (isRunning) {
                     seconds++;
                 }
-                handler.postDelayed(this,1000);
+                handler.postDelayed(this, 1000);
             }
         });
     }
