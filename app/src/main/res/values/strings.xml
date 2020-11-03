@@ -7,14 +7,8 @@
     <string name="birthplace_text">Місце народження</string>
     <string name="name_text">Назва</string>
     <string name="btn_ok_text">ОК</string>
+    <string name="btn_author_text">Список авторів</string>
     <string name="btn_book_detail_text">Детальніше</string>
-    <string-array name="book_author">
-        <item>Тарас Шевченко</item>
-        <item>Всеволод Нестайко</item>
-        <item>Брет Истон Эллис</item>
-        <item>Габриэль Гарсиа Маркес</item>
-        <item>Марк Твен</item>
-    </string-array>
     <string name="author_direction_txt">Літературний напрям</string>
     <string name="author_direction_baroque_txt">Бароко</string>
     <string name="author_direction_realism_txt">Реалізм</string>

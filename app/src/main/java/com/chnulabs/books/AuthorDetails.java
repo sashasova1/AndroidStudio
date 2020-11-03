@@ -30,14 +30,6 @@ public class AuthorDetails {
         return litDirection;
     }
 
-    public boolean isRusLangFlg() {
-        return rusLangFlg;
-    }
-
-    public boolean isUaLangFlg() {
-        return uaLangFlg;
-    }
-
     private final static ArrayList<AuthorDetails> authors = new ArrayList<>(
             Arrays.asList(
                     new AuthorDetails("Тарас Шевченко", "с. Моринці", 1, false, true),
@@ -55,5 +47,14 @@ public class AuthorDetails {
             }
         }
         return null;
+    }
+
+    public static ArrayList<AuthorDetails> getAuthors() {
+        return authors;
+    }
+
+    @Override
+    public String toString() {
+        return authorName;
     }
 }

@@ -46,4 +46,9 @@ public class Book {
         }
         return bkList;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

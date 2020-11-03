@@ -69,5 +69,13 @@ public class AuthorActivity extends AppCompatActivity {
         Toast.makeText(this, outString, Toast.LENGTH_LONG).show();
     }
 
+    public void onBtnBookListClick(View view) {
+        Intent localIntent = getIntent();
+        String author = localIntent.getStringExtra(BOOK_AUTHOR);
+
+        Intent newIntent = new Intent(this, BookListActivity.class);
+        newIntent.putExtra(BookListActivity.BOOK_AUTHOR, author);
+        startActivity(newIntent);
+    }
 
 }

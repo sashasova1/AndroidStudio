@@ -185,5 +185,16 @@
             android:text="@string/btn_ok_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ru_flg" />
+
+        <Button
+            android:id="@+id/btnBookList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/default_padding"
+            android:onClick="onBtnBookListClick"
+            android:text="@string/label_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ru_flg" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

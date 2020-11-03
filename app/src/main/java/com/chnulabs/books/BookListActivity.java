@@ -7,10 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class BookListActivity extends AppCompatActivity {
-    private float textSize;
     public static final String BOOK_AUTHOR = "author";
 
     @Override
@@ -21,18 +22,13 @@ public class BookListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String author = intent.getStringExtra(BOOK_AUTHOR);
 
-        StringBuilder txtBooks = new StringBuilder();
-        for (Book s : Book.getBooks(author)) {
-            txtBooks.append(s.getName()).append("\t - \t").append(s.getGenre()).append("\n");
-        }
-        TextView textView = findViewById(R.id.text);
-        textView.setText(txtBooks.toString());
-        textSize = textView.getTextSize();
-        if (savedInstanceState != null) {
-            textSize = savedInstanceState.getFloat("textSize");
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-
-        }
+        ListView listView = (ListView) findViewById(R.id.booksList);
+        ArrayAdapter<Book> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                Book.getBooks(author)
+        );
+        listView.setAdapter(adapter);
     }
 
     public void onBtnSendClick(View view) {
@@ -43,17 +39,5 @@ public class BookListActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_TITLE, "Список літератури");
         intent.putExtra(Intent.EXTRA_TEXT, textView.getText());
         startActivity(intent);
-    }
-
-    public void onBtnPlusClick(View view) {
-        textSize *= 1.1f;
-        TextView textView = findViewById(R.id.text);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putFloat("textSize", textSize);
     }
 }

@@ -4,32 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/default_padding"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".BookListActivity">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_text"
-        android:textSize="18sp" />
+    <ListView
+        android:id="@+id/booksList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/sendBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/default_padding"
         android:onClick="onBtnSendClick"
         android:text="@string/btn_send"
-        android:textSize="19sp" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onBtnPlusClick"
-        android:text="+"
-        android:textSize="19sp" />
+        android:textSize="16sp" />
 
 </LinearLayout>
