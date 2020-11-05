@@ -24,12 +24,12 @@ public class AuthorActivity extends AppCompatActivity {
         AuthorDetails author = AuthorDetails.getAuthor(authorName);
 
         TextView txtImgAuthor = (TextView) findViewById(R.id.authorNameImageTxt);
-        txtImgAuthor.setText(author.getAuthorName());
+        txtImgAuthor.setText(author.getName());
         TextView txtImgBirthplace = (TextView) findViewById(R.id.birthplaceImageTxt);
         txtImgBirthplace.setText(author.getBirthplace());
 
         EditText txtAuthorName = (EditText) findViewById(R.id.authorEdit);
-        txtAuthorName.setText(author.getAuthorName());
+        txtAuthorName.setText(author.getName());
         EditText txtBirthplace = (EditText) findViewById(R.id.birthplaceEdit);
         txtBirthplace.setText(author.getBirthplace());
 

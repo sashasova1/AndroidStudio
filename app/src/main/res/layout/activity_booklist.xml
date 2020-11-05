@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/default_padding"
         android:onClick="onBtnSendClick"
-        android:text="@string/btn_send"
+        android:text="@string/btn_share"
         android:textSize="16sp" />
 
 </LinearLayout>

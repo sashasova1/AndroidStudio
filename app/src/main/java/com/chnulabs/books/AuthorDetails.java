@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class AuthorDetails {
-    private String authorName;
+    private String name;
     private String birthplace;
     private int litDirection;
     private boolean rusLangFlg;
     private boolean uaLangFlg;
 
-    public AuthorDetails(String authorName, String birthplace, int litDirection, boolean rusLangFlg, boolean uaLangFlg) {
-        this.authorName = authorName;
+    public AuthorDetails(String name, String birthplace, int litDirection, boolean uaLangFlg, boolean rusLangFlg) {
+        this.name = name;
         this.birthplace = birthplace;
         this.litDirection = litDirection;
-        this.rusLangFlg = rusLangFlg;
         this.uaLangFlg = uaLangFlg;
+        this.rusLangFlg = rusLangFlg;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public String getName() {
+        return name;
     }
 
     public String getBirthplace() {
@@ -30,7 +30,7 @@ public class AuthorDetails {
         return litDirection;
     }
 
-    private final static ArrayList<AuthorDetails> authors = new ArrayList<>(
+    private static ArrayList<AuthorDetails> authors = new ArrayList<>(
             Arrays.asList(
                     new AuthorDetails("Тарас Шевченко", "с. Моринці", 1, false, true),
                     new AuthorDetails("Всеволод Нестайко", "м. Бердичів", 1, true, true),
@@ -40,9 +40,13 @@ public class AuthorDetails {
             )
     );
 
+    public static void addAuthor(AuthorDetails author){
+        authors.add(author);
+    }
+
     public static AuthorDetails getAuthor(String authorName) {
         for (AuthorDetails ad : authors) {
-            if (ad.getAuthorName().equals(authorName)) {
+            if (ad.getName().equals(authorName)) {
                 return ad;
             }
         }
@@ -55,6 +59,6 @@ public class AuthorDetails {
 
     @Override
     public String toString() {
-        return authorName;
+        return name;
     }
 }

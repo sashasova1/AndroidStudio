@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Books_L6</string>
+    <string name="app_name">Електронна Бібліотека</string>
     <string name="btn_text">Показати список</string>
-    <string name="btn_send">Відправити в зовнішньому застосунку</string>
+    <string name="btn_share">Поділитися</string>
     <string name="label_text">Список книжок</string>
     <string name="author_text">Автор</string>
     <string name="birthplace_text">Місце народження</string>

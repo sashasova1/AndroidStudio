@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AuthorsListActivity" />
+        <activity
+            android:name=".AddAuthorActivity"
+            android:parentActivityName=".AuthorsListActivity" />
+        <activity
+            android:name=".AuthorsListActivity"
+            android:label="@string/btn_author_text"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".AuthorActivity" />
         <activity android:name=".BookListActivity" />
         <activity android:name=".MainActivity">
