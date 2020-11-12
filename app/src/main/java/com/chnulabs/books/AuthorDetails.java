@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class AuthorDetails {
+    private int id;
     private String name;
     private String birthplace;
     private int litDirection;
     private boolean rusLangFlg;
     private boolean uaLangFlg;
+
+    public AuthorDetails(int id, String name, String birthplace, int litDirection, boolean rusLangFlg, boolean uaLangFlg) {
+        this(name, birthplace, litDirection, uaLangFlg, rusLangFlg);
+        this.id = id;
+    }
 
     public AuthorDetails(String name, String birthplace, int litDirection, boolean uaLangFlg, boolean rusLangFlg) {
         this.name = name;
@@ -16,6 +22,10 @@ public class AuthorDetails {
         this.litDirection = litDirection;
         this.uaLangFlg = uaLangFlg;
         this.rusLangFlg = rusLangFlg;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -30,6 +40,14 @@ public class AuthorDetails {
         return litDirection;
     }
 
+    public boolean isUaLangFlg() {
+        return uaLangFlg;
+    }
+
+    public boolean isRusLangFlg() {
+        return rusLangFlg;
+    }
+
     private static ArrayList<AuthorDetails> authors = new ArrayList<>(
             Arrays.asList(
                     new AuthorDetails("Тарас Шевченко", "с. Моринці", 1, false, true),
@@ -40,7 +58,7 @@ public class AuthorDetails {
             )
     );
 
-    public static void addAuthor(AuthorDetails author){
+    public static void addAuthor(AuthorDetails author) {
         authors.add(author);
     }
 
@@ -61,4 +79,5 @@ public class AuthorDetails {
     public String toString() {
         return name;
     }
+
 }

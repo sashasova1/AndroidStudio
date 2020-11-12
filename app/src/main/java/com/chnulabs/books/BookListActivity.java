@@ -1,15 +1,13 @@
 package com.chnulabs.books;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class BookListActivity extends AppCompatActivity {
     public static final String BOOK_AUTHOR = "author";
@@ -22,7 +20,7 @@ public class BookListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String author = intent.getStringExtra(BOOK_AUTHOR);
 
-        ListView listView = (ListView) findViewById(R.id.booksList);
+        ListView listView = findViewById(R.id.booksList);
         ArrayAdapter<Book> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,

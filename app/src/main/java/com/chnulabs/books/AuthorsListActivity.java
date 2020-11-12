@@ -6,6 +6,10 @@ import androidx.appcompat.widget.ShareActionProvider;
 import androidx.core.view.MenuItemCompat;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +17,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 public class AuthorsListActivity extends AppCompatActivity {
@@ -25,28 +32,64 @@ public class AuthorsListActivity extends AppCompatActivity {
         AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String author = ((AuthorDetails) adapterView.getItemAtPosition(i))
-                        .toString();
+                AuthorDetails author = (AuthorDetails) adapterView.getItemAtPosition(i);
                 Intent intent = new Intent(AuthorsListActivity.this, AuthorActivity.class);
-                intent.putExtra(AuthorActivity.BOOK_AUTHOR, author);
+                intent.putExtra(AuthorActivity.BOOK_AUTHOR, author.getId());
                 startActivity(intent);
             }
         };
 
-        ListView listView = (ListView) findViewById(R.id.authors_list);
+        ListView listView = findViewById(R.id.authors_list);
         listView.setOnItemClickListener(listener);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        ListView listView = (ListView) findViewById(R.id.authors_list);
+
+        getDataFromDB();
+
+        ListView listView = findViewById(R.id.authors_list);
         ArrayAdapter<AuthorDetails> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
-                AuthorDetails.getAuthors()
+                //AuthorDetails.getAuthors()
+                getDataFromDB()
         );
         listView.setAdapter(adapter);
+    }
+
+    private ArrayList<AuthorDetails> getDataFromDB() {
+        ArrayList<AuthorDetails> authors = new ArrayList<>();
+        SQLiteOpenHelper sqLiteOpenHelper = new BooksDatabaseHelper(this);
+        try {
+            SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
+            Cursor cursor = db.query("Authors",
+                    new String[]{"name", "birthplace", "litDirection", "uaLangFlg", "rusLangFlg", "id"},
+                    null, null, null,
+                    null, "name");
+            while (cursor.moveToNext()) {
+                authors.add(
+                        new AuthorDetails(
+                                cursor.getInt(5),
+                                cursor.getString(0),
+                                cursor.getString(1),
+                                cursor.getInt(2),
+                                (cursor.getInt(3) > 0),
+                                (cursor.getInt(4) > 0)
+                        )
+                );
+            }
+            cursor.close();
+            db.close();
+
+        } catch (SQLException e) {
+            Toast toast = Toast.makeText(this,
+                    "Exception! DB unavailable.",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        return authors;
     }
 
     @Override
