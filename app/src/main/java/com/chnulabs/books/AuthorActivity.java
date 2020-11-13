@@ -1,22 +1,30 @@
 package com.chnulabs.books;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class AuthorActivity extends AppCompatActivity {
+
     public static final String BOOK_AUTHOR = "author";
+    public static final String ID = "id";
+
+    private Author author;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,17 +32,17 @@ public class AuthorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_author2);
 
         Intent intent = getIntent();
-        int id = intent.getIntExtra(BOOK_AUTHOR, 0);
-        AuthorDetails author = null;
+        int id = intent.getIntExtra(ID, 0);
+        author = null;
         SQLiteOpenHelper sqLiteOpenHelper = new BooksDatabaseHelper(this);
         try {
             SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
             Cursor cursor = db.query("Authors",
                     new String[]{"name", "birthplace", "litDirection", "uaLangFlg", "rusLangFlg", "id"},
-                    "id=?", new String[] {Integer.toString(id)},
+                    "id=?", new String[]{Integer.toString(id)},
                     null, null, null);
             if (cursor.moveToFirst()) {
-                author = new AuthorDetails(
+                author = new Author(
                         cursor.getInt(5),
                         cursor.getString(0),
                         cursor.getString(1),
@@ -77,40 +85,84 @@ public class AuthorActivity extends AppCompatActivity {
                 case 2:
                     ((RadioButton) findViewById(R.id.author_direction_sentimentalism)).setChecked(true);
                     break;
-                default:
-                    break;
             }
+
+            ((CheckBox) findViewById(R.id.ua_flg)).setChecked(
+                    author.isUaLangFlg()
+            );
+
+            ((CheckBox) findViewById(R.id.ru_flg)).setChecked(
+                    author.isRusLangFlg()
+            );
+
         }
     }
 
     public void onOkBtnClick(View view) {
-        String outString = "\tАвтор " + ((TextView) findViewById(R.id.authorEdit)).getText() + "\n";
-        outString += "народився у " + ((TextView) findViewById(R.id.birthplaceEdit)).getText() + ".\n\tЛітературний напрям - ";
-        if (((RadioButton) findViewById(R.id.author_direction_baroque)).isChecked()) {
-            outString += "бароко\n";
-        } else if (((RadioButton) findViewById(R.id.author_direction_realism)).isChecked()) {
-            outString += "реалізм\n";
-        } else if (((RadioButton) findViewById(R.id.author_direction_sentimentalism)).isChecked()) {
-            outString += "сентименталізм\n";
+        SQLiteOpenHelper sqLiteHelper = new BooksDatabaseHelper(this);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name",
+                ((TextView) findViewById(R.id.authorEdit)).getText().toString()
+        );
+        contentValues.put("birthplace",
+                ((TextView) findViewById(R.id.birthplaceEdit)).getText().toString()
+        );
+        contentValues.put("litDirection",
+                ((RadioButton) findViewById(R.id.author_direction_baroque)).isChecked() ? 0 : ((RadioButton) findViewById(R.id.author_direction_realism)).isChecked() ? 1 : 2
+        );
+        contentValues.put("uaLangFlg",
+                ((CheckBox) findViewById(R.id.ua_flg)).isChecked()
+        );
+        contentValues.put("rusLangFlg",
+                ((CheckBox) findViewById(R.id.ru_flg)).isChecked()
+        );
+
+        Intent intent = getIntent();
+        int id = intent.getIntExtra(ID, 0);
+        try {
+            SQLiteDatabase db = sqLiteHelper.getReadableDatabase();
+            db.update("Authors",
+                    contentValues,
+                    "id=?",
+                    new String[]{Integer.toString(id)}
+            );
+            db.close();
+            NavUtils.navigateUpFromSameTask(this);
+        } catch (SQLiteException e) {
+            Toast toast = Toast.makeText(this,
+                    "Database unavailable",
+                    Toast.LENGTH_SHORT);
+            toast.show();
         }
 
-        outString += "\tМови творів: \n";
-        if (((CheckBox) findViewById(R.id.ua_flg)).isChecked()) {
-            outString += "українська \n";
-        }
-        if (((CheckBox) findViewById(R.id.ru_flg)).isChecked()) {
-            outString += "російська \n";
-        }
-        Toast.makeText(this, outString, Toast.LENGTH_LONG).show();
     }
 
     public void onBtnBookListClick(View view) {
-        Intent localIntent = getIntent();
-        String author = localIntent.getStringExtra(BOOK_AUTHOR);
-
         Intent newIntent = new Intent(this, BookListActivity.class);
-        newIntent.putExtra(BookListActivity.BOOK_AUTHOR, author);
+        newIntent.putExtra(BookListActivity.ID, author.getId());
         startActivity(newIntent);
     }
 
+    public void onDelete(View view) {
+        SQLiteOpenHelper sqLiteHelper = new BooksDatabaseHelper(this);
+
+        Intent intent = getIntent();
+        int id = intent.getIntExtra(ID, 0);
+        try {
+            SQLiteDatabase db = sqLiteHelper.getReadableDatabase();
+            db.delete("Authors",
+                    "id=?",
+                    new String[]{Integer.toString(id)}
+            );
+            db.close();
+            NavUtils.navigateUpFromSameTask(this);
+        } catch (SQLiteException e) {
+            Toast toast = Toast.makeText(this,
+                    "Database unavailable",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+    }
 }

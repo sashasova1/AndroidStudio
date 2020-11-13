@@ -32,9 +32,10 @@ public class AuthorsListActivity extends AppCompatActivity {
         AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                AuthorDetails author = (AuthorDetails) adapterView.getItemAtPosition(i);
+                Author author = (Author) adapterView.getItemAtPosition(i);
                 Intent intent = new Intent(AuthorsListActivity.this, AuthorActivity.class);
-                intent.putExtra(AuthorActivity.BOOK_AUTHOR, author.getId());
+                intent.putExtra(AuthorActivity.ID, author.getId());
+
                 startActivity(intent);
             }
         };
@@ -50,7 +51,7 @@ public class AuthorsListActivity extends AppCompatActivity {
         getDataFromDB();
 
         ListView listView = findViewById(R.id.authors_list);
-        ArrayAdapter<AuthorDetails> adapter = new ArrayAdapter<>(
+        ArrayAdapter<Author> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 //AuthorDetails.getAuthors()
@@ -59,8 +60,8 @@ public class AuthorsListActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
-    private ArrayList<AuthorDetails> getDataFromDB() {
-        ArrayList<AuthorDetails> authors = new ArrayList<>();
+    private ArrayList<Author> getDataFromDB() {
+        ArrayList<Author> authors = new ArrayList<>();
         SQLiteOpenHelper sqLiteOpenHelper = new BooksDatabaseHelper(this);
         try {
             SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
@@ -70,7 +71,7 @@ public class AuthorsListActivity extends AppCompatActivity {
                     null, "name");
             while (cursor.moveToNext()) {
                 authors.add(
-                        new AuthorDetails(
+                        new Author(
                                 cursor.getInt(5),
                                 cursor.getString(0),
                                 cursor.getString(1),
@@ -97,7 +98,7 @@ public class AuthorsListActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.authors_menu, menu);
 
         String text = "";
-        for (AuthorDetails author : AuthorDetails.getAuthors()) {
+        for (Author author : Author.getAuthors()) {
             text += author.getName() + "\n";
         }
         MenuItem menuItem = menu.findItem(R.id.action_share);

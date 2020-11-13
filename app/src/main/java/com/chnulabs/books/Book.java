@@ -37,15 +37,20 @@ public class Book {
             )
     );
 
+    public static ArrayList<Book> getBooks() {
+        return getBooks("");
+    }
+
     public static ArrayList<Book> getBooks(String author) {
         ArrayList<Book> bkList = new ArrayList<>();
         for (Book b : books) {
-            if (b.getAuthor().equals(author)) {
+            if (b.getAuthor().equals(author) || (author.equals(""))) {
                 bkList.add(b);
             }
         }
         return bkList;
     }
+
 
     @Override
     public String toString() {

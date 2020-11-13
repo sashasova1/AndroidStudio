@@ -16,7 +16,14 @@
             android:name=".AuthorsListActivity"
             android:label="@string/btn_author_text"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".AuthorActivity" />
+        <activity android:name=".AuthorActivity"
+            android:parentActivityName=".AuthorsListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AuthorsListActivity"/>
+
+        </activity>
+
         <activity android:name=".BookListActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
