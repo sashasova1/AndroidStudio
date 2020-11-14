@@ -2,13 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.chnulabs.books">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".TodoListActivity" />
+        <activity android:name=".UserListActivity" />
+        <activity android:name=".JsonGetterActivity" />
         <activity
             android:name=".AddAuthorActivity"
             android:parentActivityName=".AuthorsListActivity" />
@@ -16,14 +22,13 @@
             android:name=".AuthorsListActivity"
             android:label="@string/btn_author_text"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".AuthorActivity"
+        <activity
+            android:name=".AuthorActivity"
             android:parentActivityName=".AuthorsListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AuthorsListActivity"/>
-
+                android:value=".AuthorsListActivity" />
         </activity>
-
         <activity android:name=".BookListActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
