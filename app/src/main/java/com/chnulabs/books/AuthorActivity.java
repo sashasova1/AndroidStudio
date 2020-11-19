@@ -1,12 +1,7 @@
 package com.chnulabs.books;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
-
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -15,13 +10,14 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
+
 public class AuthorActivity extends AppCompatActivity {
 
-    public static final String BOOK_AUTHOR = "author";
     public static final String ID = "id";
 
     private Author author;
@@ -32,9 +28,9 @@ public class AuthorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_author2);
 
         Intent intent = getIntent();
-        int id = intent.getIntExtra(ID, 0);
-        author = null;
-        SQLiteOpenHelper sqLiteOpenHelper = new BooksDatabaseHelper(this);
+        int id = intent.getIntExtra(AuthorActivity.ID, 0);
+        author = Author.httpGetAuthor(id);
+       /* SQLiteOpenHelper sqLiteOpenHelper = new BooksDatabaseHelper(this);
         try {
             SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
             Cursor cursor = db.query("Authors",
@@ -63,7 +59,7 @@ public class AuthorActivity extends AppCompatActivity {
                     "Exception! DB unavailable.",
                     Toast.LENGTH_SHORT);
             toast.show();
-        }
+        }*/
         if (author != null) {
             TextView txtImgAuthor = findViewById(R.id.authorNameImageTxt);
             txtImgAuthor.setText(author.getName());
@@ -76,13 +72,13 @@ public class AuthorActivity extends AppCompatActivity {
             txtBirthplace.setText(author.getBirthplace());
 
             switch (author.getLitDirection()) {
-                case 0:
+                case 1:
                     ((RadioButton) findViewById(R.id.author_direction_baroque)).setChecked(true);
                     break;
-                case 1:
+                case 2:
                     ((RadioButton) findViewById(R.id.author_direction_realism)).setChecked(true);
                     break;
-                case 2:
+                case 3:
                     ((RadioButton) findViewById(R.id.author_direction_sentimentalism)).setChecked(true);
                     break;
             }
@@ -109,7 +105,7 @@ public class AuthorActivity extends AppCompatActivity {
                 ((TextView) findViewById(R.id.birthplaceEdit)).getText().toString()
         );
         contentValues.put("litDirection",
-                ((RadioButton) findViewById(R.id.author_direction_baroque)).isChecked() ? 0 : ((RadioButton) findViewById(R.id.author_direction_realism)).isChecked() ? 1 : 2
+                ((RadioButton) findViewById(R.id.author_direction_baroque)).isChecked() ? 1 : ((RadioButton) findViewById(R.id.author_direction_realism)).isChecked() ? 2 : 3
         );
         contentValues.put("uaLangFlg",
                 ((CheckBox) findViewById(R.id.ua_flg)).isChecked()

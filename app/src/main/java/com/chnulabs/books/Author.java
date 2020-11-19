@@ -1,5 +1,9 @@
 package com.chnulabs.books;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -50,11 +54,11 @@ public class Author {
 
     private static ArrayList<Author> authors = new ArrayList<>(
             Arrays.asList(
-                    new Author("Тарас Шевченко", "с. Моринці", 1, false, true),
-                    new Author("Всеволод Нестайко", "м. Бердичів", 1, true, true),
-                    new Author("Габриэль Гарсиа Маркес", "м. Аракатака", 2, false, false),
-                    new Author("Брет Истон Эллис", "м. Лос-Анджелес", 1, false, false),
-                    new Author("Марк Твен", "штат Флорида", 0, false, false)
+                    new Author("Тарас Шевченко", "с. Моринці", 2, false, true),
+                    new Author("Всеволод Нестайко", "м. Бердичів", 2, true, true),
+                    new Author("Габриэль Гарсиа Маркес", "м. Аракатака", 3, false, false),
+                    new Author("Брет Истон Эллис", "м. Лос-Анджелес", 2, false, false),
+                    new Author("Марк Твен", "штат Флорида", 1, false, false)
             )
     );
 
@@ -80,4 +84,51 @@ public class Author {
         return name;
     }
 
+    public static ArrayList<Author> httpGetAuthors() {
+        ArrayList<Author> arr = new ArrayList<>();
+        String res = new HttpDataGetter(
+                "http://10.0.2.2/api/?action=get_authors_list"
+        ).getData();
+        try {
+            JSONArray jsonArray = new JSONArray(res);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject obj = jsonArray.getJSONObject(i);
+                arr.add(
+                        new Author(
+                                obj.getInt("id"),
+                                obj.getString("name"),
+                                obj.getString("birthplace"),
+                                obj.getInt("litDirection"),
+                                (obj.getInt("uaLangFlg") != 0),
+                                (obj.getInt("rusLangFlg") != 0)
+                        )
+                );
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return arr;
+    }
+
+    public static Author httpGetAuthor(int id) {
+        Author author = null;
+        String res = new HttpDataGetter(
+                "http://10.0.2.2/api/?action=get_author&author_id=" + id
+        ).getData();
+        try {
+
+            JSONObject obj = new JSONObject(res);
+            author = new Author(
+                    obj.getInt("id"),
+                    obj.getString("name"),
+                    obj.getString("birthplace"),
+                    obj.getInt("litDirection"),
+                    (obj.getInt("uaLangFlg") != 0),
+                    (obj.getInt("rusLangFlg") != 0)
+            );
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return author;
+    }
 }

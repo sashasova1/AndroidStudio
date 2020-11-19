@@ -71,7 +71,7 @@ public class BooksDatabaseHelper extends SQLiteOpenHelper {
         if (oldV < 2) {
             db.execSQL("CREATE TABLE Books(\n" +
                     "id                     INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                    "bookName                   TEXT(15) NOT NULL,\n" +
+                    "bookName               TEXT(15) NOT NULL,\n" +
                     "author_id              INTEGER REFERENCES Authors(id) ON DELETE RESTRICT\n" +
                     "                                                      ON UPDATE RESTRICT\n" +
                     ");");

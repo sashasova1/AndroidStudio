@@ -1,10 +1,5 @@
 package com.chnulabs.books;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ShareActionProvider;
-import androidx.core.view.MenuItemCompat;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -18,6 +13,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.core.view.MenuItemCompat;
 
 import java.util.ArrayList;
 
@@ -55,7 +55,8 @@ public class AuthorsListActivity extends AppCompatActivity {
                 this,
                 android.R.layout.simple_list_item_1,
                 //AuthorDetails.getAuthors()
-                getDataFromDB()
+                //getDataFromDB()
+                Author.httpGetAuthors()
         );
         listView.setAdapter(adapter);
     }
